@@ -1,0 +1,3 @@
+# PROTOTYPE deps. All that is needed is the Gemini client.
+# KazLLM goes through Ollama over HTTP (standard library, no dependencies).
+google-genai
