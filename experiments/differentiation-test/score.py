@@ -176,10 +176,12 @@ def report():
         c for c in classes
         if all((lambda d: d["fixed"] == 0 and (d["missed"] + d["broke"]) >= 2)(cell[(c, m)]) for m in models)
     ]
-    if weak or dead_classes:
+    # README: recall ≤ threshold for ALL models, or a class no model fixes.
+    all_weak = len(weak) == len(models)
+    if all_weak or dead_classes:
         print("  → THERE IS A NICHE. Gate passed, the product can be built.")
-        if weak:
-            print(f"     low recall: {', '.join(weak)}")
+        if all_weak:
+            print(f"     low recall for all models: {', '.join(weak)}")
         if dead_classes:
             print(f"     classes no model fixes: {dead_classes}")
     elif len(strong) == len(models):
@@ -187,6 +189,8 @@ def report():
         print("     round 2 is needed (see README); the project cannot be killed on this sample.")
     else:
         print("  → In between: there is a signal, but not a decisive one. Round 2 (see README).")
+        if weak:
+            print(f"     low recall only for some models: {', '.join(weak)}")
 
 
 if __name__ == "__main__":
