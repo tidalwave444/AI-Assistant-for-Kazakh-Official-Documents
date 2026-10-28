@@ -19,9 +19,9 @@ the scientific novelty of the project.
 
 ## Success criterion
 
-Real usage (live users in Kazakhstan); the diploma follows from that.
-The channel to users is building in public on reels/TikTok; the expected
-audience is students, young office workers and IT people.
+Real usage: a tool that live users in Kazakhstan actually rely on, with its
+quality measured on Layer A (see ADR-0002). The expected audience is students,
+young office workers and IT specialists.
 
 ## Constraints
 
@@ -47,7 +47,7 @@ Use the terms exactly as written here. Do not drift to synonyms.
 - **Error typology**: a hand-made list of Layer A error types with examples,
   compiled by a native speaker. The basis of the scoring rubric and of the
   "rule vs model" boundary. Built before any code (~20-30 h). This is the
-  project's moat and the central chapter of the diploma.
+  project's core contribution and the central chapter of the diploma.
 - **Gold set**: ~150 texts annotated by hand by a native speaker for Layer A
   (where the error is, its type, how to fix it). The ground-truth anchor for
   evaluation.
@@ -97,7 +97,7 @@ the native speaker). Each name names a **class of errors**.
 
 1. One proven business core (Layer A, Telegram bot).
 2. New registers (academic / youth / blog / social media) as config rows and new
-   slices of the eval set. Matches the TikTok audience.
+   slices of the eval set.
 3. New modalities (voice → official text, transcription based on KSC) as a
    module behind the same API, once the core is live.
 
@@ -147,8 +147,8 @@ speaker against the draft rubric. Two rounds, thresholds fixed in advance:
   answer. Only round 2 can close the project: 10 examples are enough to see a
   failure, but not enough to justify switching to transcription.
 
-Models fail → the niche is proven, and we have the first eval set and the first
-slide of the diploma.
+Models fail → the niche is proven, and the annotated texts become the first
+evaluation set.
 Models cope with all 25 texts → we honestly switch to the fallback (transcription).
 
 **Building the product before this test is passed is not allowed.**

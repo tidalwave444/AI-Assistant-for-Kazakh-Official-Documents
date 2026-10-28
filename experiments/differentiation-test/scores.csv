@@ -1,0 +1,7 @@
+doc_id,error_index,error_class,model,verdict,comment
+d01,0,1,kazllm,missed,
+d01,0,1,gemini-3.8-flash,missed,
+d02,0,1,kazllm,missed,
+d02,0,1,gemini-3.8-flash,missed,
+d03,0,1,kazllm,missed,
+d03,0,1,gemini-3.8-flash,missed,"unchanged, output = input"

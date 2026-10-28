@@ -13,7 +13,7 @@ Example status: ✅ confirmed / ⚠️ needs an example or a check by the native
 
 ---
 
-## 1. Орфографиялық қателер
+## 1. Орфографиялық қателер (spelling errors)
 
 A violation of the Kazakh spelling norm: letters, capitalisation, hyphenation and
 punctuation inside fixed references. The subtypes differ in where the
@@ -67,7 +67,7 @@ word. Context-dependent (the result can be a real word) → **model**.
 |---|---|---|
 | бейімі | бейіні | м → н; бейін (profile) is meant |
 
-## 2. Үндестік қатесі
+## 2. Үндестік қатесі (vowel-harmony error)
 
 The affix has the wrong vowel class/row: plural -лар/-лер/-дар/-дер/-тар/-тер,
 case and possessive affixes that break vowel or consonant harmony.
@@ -81,7 +81,7 @@ Context-dependent → **model**.
 
 Basis: Baitenova et al. 2025 / KazMorphCorpus-2025 (affix chains).
 
-## 3. Септік/тәуелдік жалғауы
+## 3. Септік/тәуелдік жалғауы (case/possessive ending)
 
 Wrong case or possessive affix, especially in izafet constructions
 (тәуелдік + септік). Context-dependent → **model**.
@@ -99,7 +99,7 @@ Levels: in a **definite** possessive relation the first word takes ілік се
 single-level relation the genitive is not needed (`кітап оқу`, reading books in
 general). The error is dropping `-тың/-тің` where the relation is definite.
 
-## 4. Калька
+## 4. Калька (calque)
 
 Word order and grammatical construction copied from Russian.
 Context-dependent → **model**. Not to be confused with class 7 (lexical).
@@ -115,7 +115,7 @@ a calque (Düisembekova; the ortalyq.kz review of calques, see
 `docs/research/corpus-sources.md` §3.1). Without a source, treat it as disputed
 and do not use it in the test.
 
-## 5. Ресми регистр
+## 5. Ресми регистр (official register)
 
 A colloquial/spoken form where an official one is required.
 Context-dependent → **model**.
@@ -127,7 +127,7 @@ Context-dependent → **model**.
 
 Punctuation and hyphenation in references belong to class 1c, not here.
 
-## 6. Реквизиттердің жоқтығы
+## 6. Реквизиттердің жоқтығы (missing document details)
 
 A mandatory document detail is missing: кімге / кімнен / күні / қолы / тақырып
 etc. Partly deterministic (whether the block is present) → **rules** + a
@@ -139,7 +139,7 @@ ST RK ISO 15489; see `docs/research/corpus-sources.md`.
 |---|---|---|
 | ⚠️ | ⚠️ | check the list against the norm |
 
-## 7. Сөзбе-сөз аудару
+## 7. Сөзбе-сөз аудару (word-for-word translation)
 
 A word translated literally, by its first dictionary meaning, where the context
 calls for a different Kazakh synonym. The fix is мағынаға сай аудару.

@@ -10,8 +10,9 @@ What runs where:
 | **Lima** (VM terminal) | Python, `run.py`, `score.py`, downloading the model from Hugging Face |
 | **macOS** (regular Mac terminal) | Ollama only: it needs Metal (GPU), and the VM has no GPU and only ~4 GB RAM for a 4.9 GB model |
 
-Files are exchanged through the shared folder `/Users/latae/Downloads`: it is
-mounted writable in Lima and visible at the same path on both sides.
+Files are exchanged through a shared folder, written below as `<shared-dir>`
+(for example `~/Downloads` on the Mac): it is mounted writable in Lima and
+visible at the same path on both sides.
 Three stages. Done by the native speaker. The result is a filled-in `scores.csv`
 and the gate verdict.
 
@@ -64,15 +65,15 @@ source ~/.bashrc
 uvx --from huggingface_hub hf auth login     # paste a token from huggingface.co/settings/tokens
 uvx --from huggingface_hub hf download issai/LLama-3.1-KazLLM-1.0-8B-GGUF4 \
    checkpoints_llama8b_031224_18900-Q4_K_M.gguf \
-   --local-dir /Users/latae/Downloads/models/kazllm
-printf 'FROM %s\n' /Users/latae/Downloads/models/kazllm/checkpoints_llama8b_031224_18900-Q4_K_M.gguf \
-   > /Users/latae/Downloads/models/kazllm/Modelfile
+   --local-dir <shared-dir>/models/kazllm
+printf 'FROM %s\n' <shared-dir>/models/kazllm/checkpoints_llama8b_031224_18900-Q4_K_M.gguf \
+   > <shared-dir>/models/kazllm/Modelfile
 ```
 
 4. **macOS:** build the model from the same file:
 
 ```bash
-ollama create kazllm -f ~/Downloads/models/kazllm/Modelfile
+ollama create kazllm -f <shared-dir>/models/kazllm/Modelfile
 ollama run kazllm "Сәлем, қалың қалай?"    # check that it answers
 ```
 
@@ -201,7 +202,7 @@ python3 score.py --report
 Prints recall per class × model, the share of `broke`, false edits on control
 texts, and the verdict against the thresholds fixed in advance (see `README.md`).
 
-- **Niche proven** → the gate is passed, go to `/to-spec` and build the product.
+- **Niche proven** → the gate is passed, proceed to the product specification.
 - **Round 2** → append 15 more texts with classes 6 and 7 to the end of
   `inputs.txt`, repeat stages 2–3. What is already scored is not rescored.
 

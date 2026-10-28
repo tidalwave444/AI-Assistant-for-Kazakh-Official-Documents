@@ -1,14 +1,16 @@
-# Differentiation test (PROTOTYPE, throwaway)
+# Differentiation test (feasibility study)
 
-> ⚠️ This is an **experiment**, not the product. It answers one question and is thrown away.
-> Not production code: no tests, no error handling beyond what is needed.
+> This is a research **experiment**, not the product. It answers one question
+> before any product code is written. It is deliberately minimal: no tests and no
+> error handling beyond what the experiment needs.
 
 ## The question it answers
 
 Do existing LLMs fail on **Layer A** of official Kazakh?
 
-- **They fail** → there is a niche, we build the product.
-- **They cope** → there is no product, we switch to transcription.
+- **They fail** → there is a niche, the product is built.
+- **They cope** → the hypothesis is rejected, and the project falls back to
+  Kazakh speech transcription.
 
 This is a **gate**: the product is not built until it is passed. See `CONTEXT.md`.
 
@@ -43,14 +45,14 @@ official Kazakh) is the strongest argument for the niche.
 ## How it works
 
 1. `inputs.txt`: texts with errors, in a plain-text format (not JSON).
-   Written by the native speaker (you).
+   Written by the native speaker (the author).
 2. `python3 run.py --check` shows how the file was parsed. The format is almost
    impossible to break, but it is worth checking.
 3. `python3 run.py` runs every text through every model with a **neutral**
    prompt → `outputs.jsonl` (for the scorer) + `outputs.md` (for reading).
    An interrupted run resumes where it stopped.
 4. `python3 score.py` is interactive: it shows one error and one model output,
-   and you press `f`/`m`/`b`. No CSV to fill in by hand. You can stop at any
+   and the annotator presses `f`/`m`/`b`. No CSV to fill in by hand. You can stop at any
    time.
 5. `python3 score.py --report` prints recall per class × model and the gate
    verdict.
@@ -63,9 +65,8 @@ mistakes on their own". A neutral prompt is the only fair test for the gate.
 
 The prompt stays in Kazakh on purpose: it is part of the experimental condition.
 
-The typology prompt (the second condition from
-`docs/research/assignment-1-research-topic.md`) is added **after** the gate, for
-the research part.
+A second condition, a prompt that lists the typology classes, is added **after**
+the gate, for the research part.
 
 ## Models (hardware: MacBook M1 Pro)
 
