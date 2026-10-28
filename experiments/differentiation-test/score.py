@@ -21,7 +21,7 @@ HEADER = ["doc_id", "error_index", "error_class", "model", "verdict", "comment"]
 CLASS_NAMES = {
     0: "control (no errors)",
     1: "орфографиялық қателер",
-    2: "үндестік заңы",
+    2: "үндестік қатесі",
     3: "септік/тәуелдік жалғауы",
     4: "калька",
     5: "ресми регистр",

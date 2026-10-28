@@ -71,9 +71,12 @@ Canonical names of the error classes. The full typology with examples and the
 rubric is in `docs/typology-layer-a.md` (a living working document, filled in by
 the native speaker). Each name names a **class of errors**.
 
-- **Орфографиялық қателер** (spelling errors): Russian Cyrillic letters
-  in place of the 9 Kazakh ones (ә ө ү ұ қ ғ ң і һ).
-- **Үндестік заңы** (vowel harmony): the affix has the wrong vowel class.
+- **Орфографиялық қателер** (spelling errors): a violation of the spelling
+  norm: Russian Cyrillic letters in place of the 9 Kazakh ones
+  (ә ө ү ұ қ ғ ң і һ), capitalisation, hyphen/comma in references to articles
+  and paragraphs, a wrong letter inside a word. Subtypes 1a–1d are in the
+  typology.
+- **Үндестік қатесі** (vowel-harmony error): the affix has the wrong vowel class.
 - **Септік/тәуелдік жалғауы** (case/possessive ending): a case or possessive
   agreement error.
 - **Калька** (calque): a *structural* copy from Russian (word order,
