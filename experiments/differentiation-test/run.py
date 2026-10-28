@@ -15,6 +15,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -114,8 +115,16 @@ def gemini_provider():
     name = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 
     def call(text):
-        r = client.models.generate_content(model=name, contents=PROMPT.format(text=text))
-        return (r.text or "").strip()
+        # Free tier often answers 503 (high demand) or 429 (rate limit): wait and retry.
+        for wait in (10, 30, 60, None):
+            try:
+                r = client.models.generate_content(model=name, contents=PROMPT.format(text=text))
+                return (r.text or "").strip()
+            except Exception as e:
+                if wait is None or not any(s in str(e) for s in ("503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED")):
+                    raise
+                print(f"    {str(e)[:60]}… retry in {wait}s")
+                time.sleep(wait)
 
     return (name, call)
 
