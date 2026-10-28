@@ -8,7 +8,7 @@ NOT the product. No tests, no error handling beyond getting it to run.
 
   python3 run.py --check      # only check how inputs.txt was parsed
   python3 run.py              # run all available models
-  python3 run.py --only gemini-2.5-flash
+  python3 run.py --only gemini-3.8-flash
 """
 
 import json
@@ -111,7 +111,7 @@ def gemini_provider():
     if not key:
         raise RuntimeError("GEMINI_API_KEY is not set in the environment")
     client = genai.Client(api_key=key)
-    name = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+    name = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 
     def call(text):
         r = client.models.generate_content(model=name, contents=PROMPT.format(text=text))
@@ -202,6 +202,7 @@ def main():
 
     print(f"Models: {[n for n, _ in providers]}; documents: {len(docs)}")
     done = load_done()
+    failed = 0
     with open(OUT_JSONL, "a", encoding="utf-8") as fh:
         for d in docs:
             for name, call in providers:
@@ -210,7 +211,10 @@ def main():
                 try:
                     out = call(d["text"])
                 except Exception as e:
-                    out = f"[ERROR: {e}]"
+                    # Not saved: a failed call is retried on the next run instead of being scored.
+                    failed += 1
+                    print(f"  {d['id']} × {name} ✗ {e}")
+                    continue
                 rec = {"doc_id": d["id"], "model": name, "output": out}
                 done[(d["id"], name)] = rec
                 fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
@@ -219,7 +223,10 @@ def main():
 
     write_md(docs, done)
     print(f"\nDone: {OUT_JSONL.name}, {OUT_MD.name}")
-    print("Next: python3 score.py  (scoring one error at a time)")
+    if failed:
+        print(f"! {failed} calls failed and were not saved. Fix the cause and run again.")
+    else:
+        print("Next: python3 score.py  (scoring one error at a time)")
 
 
 if __name__ == "__main__":
